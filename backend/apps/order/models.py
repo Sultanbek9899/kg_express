@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from backend.apps.accounts.models import User
 
 
 class Order(models.Model):
