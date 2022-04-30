@@ -9,12 +9,12 @@
 <body>
     <h1>Главная страница</h1>
     <ul>
-        {% if not  request.user.is.authenticated %}
-        <li>Войти</li>
-        <li>Регистрация</li>
+        {% if not  request.user.is_authenticated %}
+        <li> <a href="{% url 'sign_in' %}"> Войти </a></li>
+        <li> <a href="{% url 'register'%}"> Регистрация</a></li>
         
         {% else %}
-        <li>Выйти</li>
+        <li>  <a href="{% url 'logout' %}">Выйти</a></li>
         {% endif %}
     </ul>
     <!--          ul>li*3         / -->

@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Регистрация</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Создать</button>
-    </form>
+    <h1>Вы успешно прошли регистрацию!</h1>
+    <h2>
+        Чтобы перейти на главную страницу перейдите по ссылке 
+        <a href="{% url 'index' %}">Главная</a>
+    </h2>
+
 </body>
 </html>
