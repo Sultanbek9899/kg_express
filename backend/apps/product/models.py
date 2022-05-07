@@ -73,9 +73,3 @@ class Product(models.Model):
 
 
 
-
-class Product(models.Model):
-    name = models.CharField()
-    category = models.ManyToManyField(
-        Category,related_name="products")
-    SubCategory = models.ManyToManyField(SubCategory)
