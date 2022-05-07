@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+    <h1>{{product.name}}</h1>
+    <h2>{{name}}</h2>
+    <h4>{{product.price}} сом</h4>
+    <img src="{{product.image.url}}" alt="">
+    <p>{{ product.description }} </p>
+
+    {% for sub in subs %}
+    
+        <h4>{{sub.name}}</h4>
+    {% endfor %}
+{% endblock %}

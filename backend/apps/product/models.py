@@ -69,3 +69,13 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
+
+
+
+
+
+class Product(models.Model):
+    name = models.CharField()
+    category = models.ManyToManyField(
+        Category,related_name="products")
+    SubCategory = models.ManyToManyField(SubCategory)

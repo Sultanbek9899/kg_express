@@ -1,7 +1,13 @@
 
+from re import template
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import TemplateView, ListView
+from django.views.generic import (
+    TemplateView, 
+    ListView,
+    DetailView
+)
+
 import json
 # Create your views here.
 from .models import SubCategory, Category , Product
@@ -26,3 +32,16 @@ class ProductListView(ListView):
     #стандартное имя списка продуктов в шаблоне 
     # для ListView - object_list
 
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "product_detail.html"
+    context_object_name = "product" # стандартный object
+    # 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['subs'] = SubCategory.objects.all()
+        print(context)
+        return context
