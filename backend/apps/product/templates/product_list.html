@@ -1,14 +1,21 @@
-{% extends 'base.html' %}
+{% extends 'base_tabler.html' %}
 
 {% block content %}
-    <h1> Список товара: </h1>
     {% for product in products %}
-     <h3> 
-         <a href="{% url 'product_detail' product.id %}">
-         {{ product.name }}
-        </a>
-    </h3>
-        <img src="{{product.image.url}}" alt="Фото не найдено" width="300">
     
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+          <div class="card-img-top img-responsive img-responsive-21x10" style="background-image: url({{product.image.url}})" ></div>
+          <div class="card-body">
+            <h3 class="card-title">{{ product.name }}</h3>  
+            <p class="text-muted">{{product.price}}сом  </p>
+            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                <a href="#" class="btn btn-primary btn-pill w-200">
+                  Primary
+                </a>
+              </div>
+        </div>
+        </div>
+      </div>
     {% endfor %}
 {% endblock %}

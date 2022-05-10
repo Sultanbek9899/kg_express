@@ -1,6 +1,4 @@
 
-import imp
-from re import template
 from django.shortcuts import render, redirect
 from django.views.generic import (
     FormView, 
