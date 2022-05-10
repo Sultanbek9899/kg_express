@@ -31,6 +31,7 @@ class LoginView(FormView):
             else:
                 return HttpResponse("Ваш аккаунт неактивен")
         return HttpResponse("Такого юзера не существует")
+    
 
 
 

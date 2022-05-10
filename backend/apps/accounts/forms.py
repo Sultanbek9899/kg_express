@@ -10,11 +10,24 @@ class LoginForm(forms.Form):
     )
     password = forms.CharField(
         label="Пароль",
-        widget=forms.PasswordInput(attrs={"class":"form-control"})
+        widget=forms.PasswordInput(
+            attrs={
+                "class":"form-control",
+                "type":"password",
+                "autocomplete":"off",
+                "placeholder":"Пароль"   
+            }
+            )
     )
 
 
 class UserRegisterForm(UserCreationForm):
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class":"form-control"})
+        )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class":"form-control"})
+    )
     class Meta:
         model = User
         fields = [
@@ -23,7 +36,14 @@ class UserRegisterForm(UserCreationForm):
             'last_name',
             'middle_name',
             'phone',
-            'avatar',
         ]
-    
+        form_control = {"class":"form-control"}
+        widgets = {
+            "email":forms.EmailInput(attrs=form_control),
+            "first_name":forms.TextInput(attrs=form_control),
+            "last_name":forms.TextInput(attrs={"class":"form-control"}),
+            "middle_name":forms.TextInput(attrs={"class":"form-control"}),
+            "phone":forms.TextInput(attrs={"class":"form-control"}),
+        
+        }
     # Для сравнения двух паролей после ввода пароля
