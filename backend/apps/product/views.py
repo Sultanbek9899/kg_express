@@ -27,21 +27,25 @@ class IndexPage(TemplateView):
 class ProductListView(ListView):
     model = Product
     template_name = "product_list.html"
-    context_object_name = "products"
-    queryset = Product.objects.filter(is_active=True)
+    paginate_by = 1
     #стандартное имя списка продуктов в шаблоне 
     # для ListView - object_list
 
+    def get_queryset(self):
+        print(self.kwargs)
+        category_slug = self.kwargs.get('slug')
+        subcategory_slug = self.kwargs.get('subcategory_slug')
+        if subcategory_slug:
+            products = Product.objects.filter(is_active=True, subcategory__slug=subcategory_slug)
+        elif category_slug:
+            products = Product.objects.filter(is_active=True, category__slug=category_slug)
+        else:
+            products = Product.objects.filter(is_active=True)
+        return products  
 
 
 class ProductDetailView(DetailView):
     model = Product
     template_name = "product_detail.html"
     context_object_name = "product" # стандартный object
-    # 
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['subs'] = SubCategory.objects.all()
-        print(context)
-        return context
