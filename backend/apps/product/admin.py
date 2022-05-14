@@ -1,3 +1,4 @@
+from csv import list_dialects
 from re import search
 from django.contrib import admin
 
@@ -38,3 +39,11 @@ class ProductAdmin(admin.ModelAdmin):
         'updated',
         'is_active'
     ]
+
+
+
+@admin.register(BanerImage)
+class BanerImageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'add_link', 'image', 'created']
+    list_filter = ['created']
+    

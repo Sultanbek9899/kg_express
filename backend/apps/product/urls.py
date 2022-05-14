@@ -10,3 +10,6 @@ urlpatterns = [
     path('list/category/<slug:slug>/', ProductListView.as_view(), name="category_products"),
     path('list/category/<slug:slug>/<slug:subcategory_slug>/', ProductListView.as_view(), name="subcategory_products"),
 ]
+
+# 'list/category/avtotovary/'
+#'list/category/obuv/jenskaya/'

@@ -10,7 +10,7 @@ from django.views.generic import (
 
 import json
 # Create your views here.
-from .models import SubCategory, Category , Product
+from .models import SubCategory, Category , Product, BanerImage
 
 def get_subcategory(request):
     id = request.GET.get('id', '')
@@ -22,7 +22,13 @@ def get_subcategory(request):
 class IndexPage(TemplateView):
     template_name = "index.html"
 
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        baners = BanerImage.objects.all()
+        if len(baners) > 6:
+            baners = baners[:6]
+        context['baners'] = baners
+        return context
 
 class ProductListView(ListView):
     model = Product
@@ -35,7 +41,9 @@ class ProductListView(ListView):
         print(self.kwargs)
         category_slug = self.kwargs.get('slug')
         subcategory_slug = self.kwargs.get('subcategory_slug')
-        if subcategory_slug:
+        print(category_slug)
+        print(subcategory_slug)
+        if subcategory_slug: 
             products = Product.objects.filter(is_active=True, subcategory__slug=subcategory_slug)
         elif category_slug:
             products = Product.objects.filter(is_active=True, category__slug=category_slug)

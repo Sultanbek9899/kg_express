@@ -285,9 +285,11 @@
           <div class="page-header d-print-none">
             <div class="row g-2 align-items-center">
               <div class="col">
-                <h2 class="page-title">
-                  Empty page
-                </h2>
+                <h1 class="page-title">
+                  {% block page_title %}
+
+                  {% endblock %}
+                </h1>
               </div>
             </div>
           </div>

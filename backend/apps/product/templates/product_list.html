@@ -6,14 +6,18 @@
         
       <div class="col-sm-6 col-lg-4">
         <div class="card card-sm">
-          <a href="#" class="d-block">
+          <a href="{% url 'product_detail' product.id %}" class="d-block">
             <img src="{{product.image.url}}" class="card-img-top">
           </a>
           <div class="card-body">
             <div class="d-flex align-items-center">
               
               <div>
-                <div><h3>{{product.name}}</h3></div>
+                <div>
+                  <a href="{% url 'product_detail' product.id %}">
+                    <h3>{{product.name}}</h3>
+                  </a>
+                </div>
                 <div class="text-muted">{{product.price}} сом</div>
               </div>
               <div class="ms-auto">

@@ -71,5 +71,18 @@ class Product(models.Model):
         return self.name
 
 
+class BanerImage(models.Model):
+    image = models.ImageField(upload_to="baners/")
+    add_link = models.URLField()
+    name = models.CharField("Название", max_length=50)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = "Картинка для банера"
+        verbose_name_plural = "Картинки для банера"
+        ordering = ['-created']
+        
+    def __str__(self):
+        return self.name
 
