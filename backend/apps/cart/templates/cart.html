@@ -1,7 +1,88 @@
 {% extends 'base_tabler.html' %}
 
+{% block content %}
+
+<div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Корзина</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table card-table table-vcenter text-nowrap datatable table-striped">
+          <thead>
+            <tr>
+              <th class="w-1">N. <!-- Download SVG icon from http://tabler-icons.io/i/chevron-up -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm text-dark icon-thick" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="6 15 12 9 18 15" /></svg>
+              </th>
+              <th>Фото</th>
+              <th>Название</th>
+              <th>Цена(шт.)</th>
+              <th>Количество</th>
+              <th>Общая цена</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart %}
+
+                <tr>
+                <td><span class="text-muted">{{item.product.id}}</span></td>
+                <td>
+                    <img src="{{ item.product.image.url }}" alt="" width="50">
+                </td>
+                <td>
+                    <a href="invoice.html" class="text-reset" tabindex="-1">
+                        {{item.product.name}}
+                    </a>
+                </td>
+                <td>
+                    {{item.price}}
+                </td>
+                <td>
+                    {{item.quantity}}
+                </td>
+                <td>{{item.total_price}}сом</td>
+                <td>
+                    <a href="{% url 'remove_cart' item.product.id %}" class="btn btn-danger active w-200">
+                    Удалить
+                    </a>
+                    
+                </td>
+                </tr>
+
+            {% empty %}
+                <tr>
+                    <td>
+                        Ваша корзина пустая
+                    </td>
+                </tr>
+            {% endfor %}
 
 
-{% for item in cart %}
-    <h1>{{item.product.name}}</h1>
-{% endfor %}
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="card-footer d-flex">
+          <h5>Общая цена:{{cart.get_total_price}}</h5>
+      </div>
+
+      <div class="card-footer d-flex align-items-center">
+       
+        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+            <a href="{% url 'clear_cart' %}" class="btn btn-light active w-40">
+              Очистить корзину
+            </a>
+        </div>
+        
+        <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+            <a href="#" class="btn btn-primary active w-40">
+              Оформить заказ
+            </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}
