@@ -31,7 +31,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
                   67
                 </a>
-                <a class="ms-3 text-muted" href="{% url 'add_cart' product.id %}">
+                <a class="ms-3 text-muted cart-item-plus"  data-id="{{product.id}}" href="#">
                   <i class="ti ti-shopping-cart-plus" ></i>
                 </a>
               </div>
@@ -84,4 +84,22 @@
       </ul>
     </div>
 </div>
+{% endblock %}
+
+
+
+{% block javascript %}
+  <script type="text/javascript">  
+    $(".cart-item-plus").click(function(){
+        let product_id = $(this).attr("data-id")
+        console.log(product_id)  
+        $.ajax({
+          type:"POST",
+          url: '/cart/ajax/add/'+product_id+"/"    
+        }).done(function(){
+          alert("УСПЕШНО ДОБАВЛЕНО!");
+        });
+    })
+  </script>
+
 {% endblock %}
