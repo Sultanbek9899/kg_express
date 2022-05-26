@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from backend.apps.accounts.models import User
+from backend.apps.product.models import Product
 
 
 class Order(models.Model):
@@ -29,4 +30,24 @@ class Order(models.Model):
         choices=ORDER_STATUSES,
         default=STATUS_NEW
         )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Заказ"
+        verbose_name_plural = "Заказы"
+        ordering = ['-created']
 
+    def __str__(self):
+        return f"Заказ-{self.id}"
+
+
+
+class OrderItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING, verbose_name="Товар")
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name="Заказ")
+    price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField("Количество", default=1)
+
+    def __str__(self):
+        return f"{self.id}"
