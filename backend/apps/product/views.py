@@ -7,6 +7,7 @@ from django.views.generic import (
     ListView,
     DetailView
 )
+from django.db.models import Q
 
 import json
 # Create your views here.
@@ -54,3 +55,29 @@ class ProductDetailView(DetailView):
     template_name = "product_detail.html"
     context_object_name = "product" # стандартный object
 
+
+
+
+
+
+
+class ProductSearchView(ListView):
+    model = Product
+    template_name = "product_list.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        search_text = self.request.GET.get("query")
+        if search_text is None:
+            return self.model.objects.filter(is_active=True)
+        q=self.model.objects.filter(
+            Q(name__icontains=search_text)
+            |Q(description__icontains=search_text)
+            )
+        return q
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search']=True
+        context['search_query'] = self.request.GET.get("query")
+        return context
