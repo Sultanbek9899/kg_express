@@ -1,9 +1,18 @@
 from csv import list_dialects
 from re import search
 from django.contrib import admin
-
+from ckeditor.widgets import CKEditorWidget
 # Register your models here.
 from .models import *
+from django.forms import ModelForm, CharField, widgets
+
+class ProductAdminForm(ModelForm):
+    description = CharField(widget=CKEditorWidget())
+    
+    class Meta:
+        model = Product
+        fields = '__all__'
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -12,6 +21,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(SubCategory)
 class SubCategory(admin.ModelAdmin):
+
     list_display = (
         'name', 
         'category', 
@@ -29,6 +39,7 @@ class SubCategory(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    form = ProductAdminForm
     list_display = [
         'name',
         'price',

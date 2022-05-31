@@ -21,7 +21,6 @@ class LoginView(FormView):
         email = data['email']
         password = data['password']     
         user = authenticate(email=email, password=password)
-        print(user.is_authenticated)
         if user is not None:
             if user.is_active:
                 login(self.request, user)

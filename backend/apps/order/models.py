@@ -18,7 +18,6 @@ class Order(models.Model):
         (STATUS_DELIVERED, "Доставлен"),
         (STATUS_REJECTED, "Отменен"),
     )
-    
     user  = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField("Адрес",max_length=255)
     postal_code = models.CharField("Почтовый индекс", max_length=10)
