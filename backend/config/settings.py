@@ -40,12 +40,14 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'django_filters',
+    'rest_framework',
 
     #apps
     'backend.apps.accounts',
     'backend.apps.order',
     'backend.apps.product',
     'backend.apps.cart',
+    'backend.apps.api',
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
