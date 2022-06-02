@@ -5,7 +5,13 @@
     {% if search %}
       <h2>Результаты поиска по запросу: {{search_query}}</h2>
     {% endif %}
-    
+    <form method="get">
+      {{filter.form}}
+      <button type="submit" class="btn btn-primary">
+        Филтровать
+      </button>
+    </form>
+
     {% for product in page_obj %}
         
       <div class="col-sm-6 col-lg-4">

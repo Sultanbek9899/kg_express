@@ -9,6 +9,8 @@ from django.views.generic import (
 )
 from django.db.models import Q
 
+from django_filters.views import FilterView
+
 import json
 # Create your views here.
 from .models import SubCategory, Category , Product, BanerImage
@@ -31,10 +33,12 @@ class IndexPage(TemplateView):
         context['baners'] = baners
         return context
 
-class ProductListView(ListView):
+from .filters import ProductFilter
+class ProductListView(FilterView):
     model = Product
     template_name = "product_list.html"
     paginate_by = 10
+    filterset_class = ProductFilter
     #стандартное имя списка продуктов в шаблоне 
     # для ListView - object_list
 
